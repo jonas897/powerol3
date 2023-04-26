@@ -108,6 +108,16 @@
         </form>
 
 
+
+
+
+
+
+
+
+
+
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -120,7 +130,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create customer</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Check car</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -128,7 +138,7 @@
 
         <form method="POST">
             <div class="form-group">
-                <label for="customerName">Customer name</label>
+                <label for="customerName">Car license number</label>
                 <input type="text" class="form-control" id="examplcustomerNameeInputEmail1" aria-describedby="emailHelp" placeholder="">
             </div>
             <button type="submit" class="btn btn-primary">Check</button>
@@ -148,7 +158,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create customer</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Create car</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
