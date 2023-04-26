@@ -2,7 +2,6 @@
 include "includes/class_user.php";
 include "includes/config.php";
 
-
 if(isset($_POST['logout-button'])){
 	if($user->logout()){
 		$user->redirect ("index.php");
