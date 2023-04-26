@@ -8,10 +8,16 @@ include "header.php";
 		echo"<h2>Hello {$_SESSION['uname']}</h2>";
 		echo "<p>Your role number is {$_SESSION['urole']}</p>";
 		echo "<p>Your id number is {$_SESSION['uid']}</p>";
-include "footer.php";
 ?>
 
 <div class="projects">
-
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Title</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
 </div>
 
+<?php include "footer.php"; ?>

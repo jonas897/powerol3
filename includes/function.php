@@ -30,4 +30,29 @@ function createCar($conn, $make , $model , $licensenumber ){
 
 }
 
+function createProjekt($conn, $customername){
+
+    echo"hej car";
+
+    $stmt_insertCar = $conn->prepare("INSERT INTO cars (Make ) VALUES (:make , :model , :licensenumber )");
+    $stmt_insertCar->bindparam(':make',$make, PDO::PARAM_STR);
+    $stmt_insertCar->execute();
+
+}
+
+
+
+function fetchTcustomer($conn){
+    $fetchTcustomer= $conn->prepare('SELECT * FROM customer') ;
+    $fetchTcustomer->execute();
+    return $fetchTcustomer; 
+}
+
+function fetchTcustomer($conn){
+    $fetchTcustomer= $conn->prepare('SELECT * FROM customer') ;
+    $fetchTcustomer->execute();
+    return $fetchTcustomer; 
+}
+
+
 ?>
