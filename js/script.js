@@ -1,3 +1,5 @@
 
-$('#select-gear').selectize({ sortField: 'text' })
+$(function () {
+    $('#normalize').selectize();
+  });
 
