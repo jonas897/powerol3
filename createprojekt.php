@@ -1,4 +1,24 @@
-<?php include "header.php"?>
+<?php include "header.php";
+
+if(isset($_POST['submit-customer'])){
+
+  createCustomer($conn, $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phoneNumber'], $_POST['adress'], $_POST['postcode'], $_POST['city']);
+}
+
+if(isset($_POST['create-car'])){
+
+  createCar($conn, $_POST['make'], $_POST['model'], $_POST['licensenumber']);
+}
+
+
+
+
+
+
+?>
+
+
+
 
 <div class="container">
 <h1 class="pcenter">Create project</h1><br>
@@ -78,33 +98,33 @@
         <form method="POST">
             <div class="form-group">
                 <label for="firstname">firstname</label>
-                <input type="text" class="form-control" id="firstname" aria-describedby="firstnameHelp" placeholder="">
+                <input type="text" class="form-control" id="firstname"  name="firstname" aria-describedby="firstnameHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="lastname">lastname</label>
-                <input type="text" class="form-control" id="lastname" aria-describedby="lastnameHelp" placeholder="">
+                <input type="text" class="form-control" id="lastname" name="lastname" aria-describedby="lastnameHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="">
+                <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="phoneNumber">Phone number</label>
-                <input type="text" class="form-control" id="phoneNumber" aria-describedby="phonenumberHelp" placeholder="">
+                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" aria-describedby="phonenumberHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="adress">Adress</label>
-                <input type="text" class="form-control" id="adress" aria-describedby="adressHelp" placeholder="">
+                <input type="text" class="form-control" id="adress" name="adress" aria-describedby="adressHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="postcode">Postcode</label>
-                <input type="text" class="form-control" id="postcode" aria-describedby="postcodeHelp" placeholder="">
+                <input type="text" class="form-control" id="postcode" name="postcode" aria-describedby="postcodeHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="city">City</label>
-                <input type="text" class="form-control" id="city" aria-describedby="cityHelp" placeholder="">
+                <input type="text" class="form-control" id="city" name="city" aria-describedby="cityHelp" placeholder="">
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <input type="submit" name="submit-customer" class="btn btn-primary">Create</input>
         </form>
 
 
@@ -156,17 +176,17 @@
         <form method="POST">
             <div class="form-group">
                 <label for="brand">Brand</label>
-                <input type="text" class="form-control" id="brand" aria-describedby="brandHelp" placeholder="">
+                <input type="text" class="form-control" name="make" id="brand" aria-describedby="brandHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="model">Model</label>
-                <input type="text" class="form-control" id="model" aria-describedby="modelHelp" placeholder="">
+                <input type="text" class="form-control" name="model" id="model" aria-describedby="modelHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="licensenumber">License number</label>
-                <input type="text" class="form-control" id="licensenumber" aria-describedby="licensenumberHelp" placeholder="">
+                <input type="text" class="form-control" name="licensenumber" id="licensenumber" aria-describedby="licensenumberHelp" placeholder="">
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <input type="submit" class="btn btn-primary" name="create-car">Create</input>
         </form>
 
 
@@ -177,3 +197,26 @@
     </div>
   </div>
 </div>
+
+
+
+<select id="select-gear" class="demo-default" multiple placeholder="Select gear...">
+  <option value="">Select gear...</option>
+  <optgroup label="Climbing">
+      <option value="pitons">Pitons</option>
+      <option value="cams">Cams</option>
+      <option value="nuts">Nuts</option>
+      <option value="bolts">Bolts</option>
+      <option value="stoppers">Stoppers</option>
+      <option value="sling">Sling</option>
+  </optgroup>
+  <optgroup label="Skiing">
+      <option value="skis">Skis</option>
+      <option value="skins">Skins</option>
+      <option value="poles">Poles</option>
+  </optgroup>
+</select>
+
+
+
+
