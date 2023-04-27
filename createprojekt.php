@@ -1,5 +1,44 @@
 <?php include "header.php";
 
+
+if(isset($_POST['submit-customer'])){
+
+  createCustomer($conn, $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phoneNumber'], $_POST['adress'], $_POST['postcode'], $_POST['city']);
+}
+
+if(isset($_POST['create-car'])){
+
+  createCar($conn, $_POST['make'], $_POST['model'], $_POST['licensenumber']);
+}
+
+
+
+
+
+
+
+
+?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+  integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+  integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+
+
+
 if(!$user->checkLoginStatus()){
   $user->redirect("index.php");
 }
@@ -49,6 +88,16 @@ if(isset($_POST['create-projekt'])){
 <h2 class="pcenter">Customer info</h2><br>
 
 <form method="POST">
+  
+<select id="normalize">
+<option value=""></option>
+    <?php
+        $allcustomer = fetchTcustomer($conn);
+        foreach($allcustomer as $row){
+            echo "<option value='{$row['id']}'>{$row['First_Name']}</option>" ;
+
+
+<form method="POST">
 
 <div class="w-50 ">
 <select name="customer" id="normalize">
@@ -57,11 +106,15 @@ if(isset($_POST['create-projekt'])){
         $allcustomer = fetchTcustomer($conn);
         foreach($allcustomer as $row){
             echo "<option value='{$row['customer_id']}' name='{$row['customer_id']}' >{$row['First_Name']}</option>" ;
+
         }
 
     ?>
 </select>
+
+
 </div>
+
 
 <br>
 <div class="pcenter">
@@ -77,12 +130,21 @@ if(isset($_POST['create-projekt'])){
 
 <h2 class="pcenter">Car info</h2><br>
 
+
+<select id="normalize">
+<option value=""></option>
+    <?php
+        $allcustomer = fetchTcustomer($conn);
+        foreach($allcustomer as $row){
+            echo "<option value='{$row['id']}'>{$row['First_Name']}</option>" ;
+
 <select name="car"id="normalize2">
 <option value=""></option>
     <?php
         $allcars = fetchcar($conn);
         foreach($allcars as $row){
             echo "<option value='{$row['car_id']}' name='{$row['car_id']}'>{$row['Make']}    {$row['Reg']}</option>" ;
+
         }
 
     ?>
@@ -123,29 +185,6 @@ if(isset($_POST['create-projekt'])){
  <input type="submit" name="create-projekt" class="btn btn-primary">Create</input>
 
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -217,6 +256,8 @@ if(isset($_POST['create-projekt'])){
         </form>
 
 
+
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -229,7 +270,7 @@ if(isset($_POST['create-projekt'])){
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create customer</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Check car</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -237,7 +278,7 @@ if(isset($_POST['create-projekt'])){
 
         <form method="POST">
             <div class="form-group">
-                <label for="customerName">Customer name</label>
+                <label for="customerName">Car license number</label>
                 <input type="text" class="form-control" id="examplcustomerNameeInputEmail1" aria-describedby="emailHelp" placeholder="">
             </div>
             <button type="submit" class="btn btn-primary">Check</button>
@@ -257,7 +298,7 @@ if(isset($_POST['create-projekt'])){
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create customer</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Create car</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -285,4 +326,8 @@ if(isset($_POST['create-projekt'])){
       </div>
     </div>
   </div>
+
 </div>
+
+</div>
+
