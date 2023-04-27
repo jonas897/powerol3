@@ -1,0 +1,5 @@
+
+$(function () {
+    $('#normalize').selectize();
+  });
+

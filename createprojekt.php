@@ -1,14 +1,60 @@
-<?php include "header.php"?>
+<?php include "header.php";
+
+if(isset($_POST['submit-customer'])){
+
+  createCustomer($conn, $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phoneNumber'], $_POST['adress'], $_POST['postcode'], $_POST['city']);
+}
+
+if(isset($_POST['create-car'])){
+
+  createCar($conn, $_POST['make'], $_POST['model'], $_POST['licensenumber']);
+}
+
+
+
+
+
+
+
+
+?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+  integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+  integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+
 
 <div class="container">
 <h1 class="pcenter">Create project</h1><br>
 
 <h2 class="pcenter">Customer info</h2><br>
-<div class="pcenter">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkCustomer">
-        Check customer
-    </button>
-</div><br>
+<form method="POST">
+  
+<select id="normalize">
+<option value=""></option>
+    <?php
+        $allcustomer = fetchTcustomer($conn);
+        foreach($allcustomer as $row){
+            echo "<option value='{$row['id']}'>{$row['First_Name']}</option>" ;
+        }
+
+    ?>
+</select>
+
+<br>
 <div class="pcenter">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkCustomerInfo">
         Check customer info
@@ -22,11 +68,18 @@
 
 <h2 class="pcenter">Car info</h2><br>
 
-<div class="pcenter">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkCar">
-         Check car
-    </button>
-</div><br>
+<select id="normalize">
+<option value=""></option>
+    <?php
+        $allcustomer = fetchTcustomer($conn);
+        foreach($allcustomer as $row){
+            echo "<option value='{$row['id']}'>{$row['First_Name']}</option>" ;
+        }
+
+    ?>
+</select>
+
+<br>
 <div class="pcenter">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#checkCarInfo">
         Check car info
@@ -37,6 +90,54 @@
         Create new car
     </button>
 </div><br>
+
+<div class="form-group">
+  <label for="email">Date Start</label>
+  <input type="date" class="form-control" id="datestart" name="datestart" aria-describedby="emailHelp" placeholder="">
+</div>
+
+<div class="form-group">
+      <label for="email">Date end</label>
+      <input type="date" class="form-control" id="dateend" name="dateend" aria-describedby="emailHelp" placeholder="">
+ </div>
+
+ <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="headline" name="headline" aria-describedby="emailHelp" placeholder="">
+ </div>
+
+ <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="description" name="description" aria-describedby="emailHelp" placeholder="">
+ </div>
+
+ <input type="submit" name="create-projekt" class="btn btn-primary">Create</input>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <div class="modal fade" id="checkCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -51,8 +152,7 @@
 
         <form method="POST">
             <div class="form-group">
-                <label for="customerName">Customer name</label>
-                <input type="text" class="form-control" id="examplcustomerNameeInputEmail1" aria-describedby="emailHelp" placeholder="">
+
             </div>
             <button type="submit" class="btn btn-primary">Check</button>
         </form>
@@ -108,6 +208,16 @@
         </form>
 
 
+
+
+
+
+
+
+
+
+
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -120,7 +230,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create customer</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Check car</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -128,12 +238,12 @@
 
         <form method="POST">
             <div class="form-group">
-                <label for="customerName">Customer name</label>
+                <label for="customerName">Car license number</label>
                 <input type="text" class="form-control" id="examplcustomerNameeInputEmail1" aria-describedby="emailHelp" placeholder="">
             </div>
             <button type="submit" class="btn btn-primary">Check</button>
         </form>
-
+          
 
       </div>
       <div class=   "modal-footer">
@@ -148,7 +258,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create customer</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Create car</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -176,4 +286,8 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> 68d9d7e10ea9f78083bfcd867767bd45addb24bf
