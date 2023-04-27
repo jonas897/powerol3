@@ -1,5 +1,9 @@
 <?php include "header.php";
 
+if(!$user->checkLoginStatus()){
+  $user->redirect("index.php");
+}
+
 if(isset($_POST['submit-customer'])){
 
   createCustomer($conn, $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phoneNumber'], $_POST['adress'], $_POST['postcode'], $_POST['city']);
@@ -11,9 +15,11 @@ if(isset($_POST['create-car'])){
 }
 
 
+if(isset($_POST['create-projekt'])){
 
+  createprojekt($conn, $_POST['customer'], $_POST['car'] , $_POST['datestart'], $_POST['dateend'],$_POST['headline'],$_POST['description']);
 
-
+}
 
 
 
@@ -37,22 +43,25 @@ if(isset($_POST['create-car'])){
 
 
 
-<div class="container">
+<div class="container ">
 <h1 class="pcenter">Create project</h1><br>
 
 <h2 class="pcenter">Customer info</h2><br>
+
 <form method="POST">
-  
-<select id="normalize">
-<option value=""></option>
+
+<div class="w-50 ">
+<select name="customer" id="normalize">
+<option value="" ></option>
     <?php
         $allcustomer = fetchTcustomer($conn);
         foreach($allcustomer as $row){
-            echo "<option value='{$row['id']}'>{$row['First_Name']}</option>" ;
+            echo "<option value='{$row['customer_id']}' name='{$row['customer_id']}' >{$row['First_Name']}</option>" ;
         }
 
     ?>
 </select>
+</div>
 
 <br>
 <div class="pcenter">
@@ -68,12 +77,12 @@ if(isset($_POST['create-car'])){
 
 <h2 class="pcenter">Car info</h2><br>
 
-<select id="normalize">
+<select name="car"id="normalize2">
 <option value=""></option>
     <?php
-        $allcustomer = fetchTcustomer($conn);
-        foreach($allcustomer as $row){
-            echo "<option value='{$row['id']}'>{$row['First_Name']}</option>" ;
+        $allcars = fetchcar($conn);
+        foreach($allcars as $row){
+            echo "<option value='{$row['car_id']}' name='{$row['car_id']}'>{$row['Make']}    {$row['Reg']}</option>" ;
         }
 
     ?>
