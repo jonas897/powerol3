@@ -30,26 +30,25 @@ include "header.php";
 
 $allprojekts = selectprojekt($conn);
   foreach ($allprojekts as $row){
-	
-	
-
-     echo "<div class='card-deck'>
+     echo "<div class='card-deck col-lg-3 col-md-4 col-sm-6'>
      <div class='card'>
-     <div class='col-4'>
+     <div class=''>
        <div class='card-body'>
          <h5 class='card-title'>{$row['Headline']}</h5>
          <ul class='list-group'>
            <li class='list-group-item list-group-item-success'><i class='fa fa-briefcase'style='font-size:20px;'></i>   License number: {$row['Reg']}</li>
            <li class='list-group-item list-group-item-success'><i class='fa-solid fa-triangle-exclamation'></i>   Problem: {$row['Beskrivning']}</li>
-           <li class='list-group-item list-group-item-success'><i class='fa fa-user'style='font-size:20px;'></i>   Date deadline: {$row['Date_Deadline']}</li>
-           <li class='list-group-item list-group-item-success'><i class='fa fa-clock-o'style='font-size:20px;'></i>   Duration</li>
-           <li class='list-group-item list-group-item-success'><i class='fa fa-inr'style='font-size:20px;'></i>   Cost</li>
+           <li class='list-group-item list-group-item-success'><i class='fa fa-clock-o'style='font-size:20px;'></i>    Deadline: {$row['Date_Deadline']}</li>
+           <li class='list-group-item list-group-item-success'><i class='fa fa-inr'style='font-size:20px;'></i>   Make: {$row['Make']}</li>
+           <li class='list-group-item list-group-item-success'><i class='fa fa-user'style='font-size:20px;'></i>   Person: {$row['First_Name']}</li>
          </ul>
          
        </div>
        <div class='card-footer'>
-        <a href='editprojekt.php?projectID={$row['projekt_id']}'>Edit project</a>
+        <a href='singleprojekt.php?projectID={$row['projekt_id']}'>Show project</a>
          </div>
+         </div>
+         
        </div>
        </div>";
 	

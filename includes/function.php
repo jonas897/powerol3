@@ -55,7 +55,7 @@ function fetchTcar($conn){
 }
 
 function selectprojekt($conn){
-    $selectprojekt= $conn->prepare('SELECT * FROM projekt INNER JOIN cars ON projekt.Car_fk = cars.car_id WHERE Status_fk = 1');
+    $selectprojekt= $conn->prepare('SELECT * FROM projekt INNER JOIN cars ON projekt.Car_fk = cars.car_id INNER JOIN customer ON projekt.Customer_fk = customer.customer_id WHERE Status_fk = 1');
     $selectprojekt->execute();
     return $selectprojekt;
 }
