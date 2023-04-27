@@ -12,6 +12,8 @@ if(isset($_POST['logout-button'])){
 
 
 
+
+
 <head>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -29,7 +31,7 @@ if(isset($_POST['logout-button'])){
 
 
 <nav id="header" class=" navbar navbar-expand-lg">
-  <a id="margin" class=" navbar-brand" href="index.php">Powerol</a>
+  <a id="margin" class=" navbar-brand" href="home.php">Powerol</a>
   <button class="navbar-toggler linkcolor" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

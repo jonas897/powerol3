@@ -1,5 +1,6 @@
 <?php include "header.php";
 
+
 if(isset($_POST['submit-customer'])){
 
   createCustomer($conn, $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phoneNumber'], $_POST['adress'], $_POST['postcode'], $_POST['city']);
@@ -37,10 +38,55 @@ if(isset($_POST['create-car'])){
 
 
 
-<div class="container">
+
+if(!$user->checkLoginStatus()){
+  $user->redirect("index.php");
+}
+
+if(isset($_POST['submit-customer'])){
+
+  createCustomer($conn, $_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['phoneNumber'], $_POST['adress'], $_POST['postcode'], $_POST['city']);
+}
+
+if(isset($_POST['create-car'])){
+
+  createCar($conn, $_POST['make'], $_POST['model'], $_POST['licensenumber']);
+}
+
+
+if(isset($_POST['create-projekt'])){
+
+  createprojekt($conn, $_POST['customer'], $_POST['car'] , $_POST['datestart'], $_POST['dateend'],$_POST['headline'],$_POST['description']);
+
+}
+
+
+
+?>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css"
+  integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
+  integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+
+
+<div class="container ">
 <h1 class="pcenter">Create project</h1><br>
 
 <h2 class="pcenter">Customer info</h2><br>
+
 <form method="POST">
   
 <select id="normalize">
@@ -49,10 +95,26 @@ if(isset($_POST['create-car'])){
         $allcustomer = fetchTcustomer($conn);
         foreach($allcustomer as $row){
             echo "<option value='{$row['id']}'>{$row['First_Name']}</option>" ;
+
+
+<form method="POST">
+
+<div class="w-50 ">
+<select name="customer" id="normalize">
+<option value="" ></option>
+    <?php
+        $allcustomer = fetchTcustomer($conn);
+        foreach($allcustomer as $row){
+            echo "<option value='{$row['customer_id']}' name='{$row['customer_id']}' >{$row['First_Name']}</option>" ;
+
         }
 
     ?>
 </select>
+
+
+</div>
+
 
 <br>
 <div class="pcenter">
@@ -68,12 +130,21 @@ if(isset($_POST['create-car'])){
 
 <h2 class="pcenter">Car info</h2><br>
 
+
 <select id="normalize">
 <option value=""></option>
     <?php
         $allcustomer = fetchTcustomer($conn);
         foreach($allcustomer as $row){
             echo "<option value='{$row['id']}'>{$row['First_Name']}</option>" ;
+
+<select name="car"id="normalize2">
+<option value=""></option>
+    <?php
+        $allcars = fetchcar($conn);
+        foreach($allcars as $row){
+            echo "<option value='{$row['car_id']}' name='{$row['car_id']}'>{$row['Make']}    {$row['Reg']}</option>" ;
+
         }
 
     ?>
@@ -117,29 +188,6 @@ if(isset($_POST['create-car'])){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="modal fade" id="checkCustomer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -178,42 +226,34 @@ if(isset($_POST['create-car'])){
         <form method="POST">
             <div class="form-group">
                 <label for="firstname">firstname</label>
-                <input type="text" class="form-control" id="firstname" aria-describedby="firstnameHelp" placeholder="">
+                <input type="text" class="form-control" id="firstname"  name="firstname" aria-describedby="firstnameHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="lastname">lastname</label>
-                <input type="text" class="form-control" id="lastname" aria-describedby="lastnameHelp" placeholder="">
+                <input type="text" class="form-control" id="lastname" name="lastname" aria-describedby="lastnameHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="">
+                <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="phoneNumber">Phone number</label>
-                <input type="text" class="form-control" id="phoneNumber" aria-describedby="phonenumberHelp" placeholder="">
+                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" aria-describedby="phonenumberHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="adress">Adress</label>
-                <input type="text" class="form-control" id="adress" aria-describedby="adressHelp" placeholder="">
+                <input type="text" class="form-control" id="adress" name="adress" aria-describedby="adressHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="postcode">Postcode</label>
-                <input type="text" class="form-control" id="postcode" aria-describedby="postcodeHelp" placeholder="">
+                <input type="text" class="form-control" id="postcode" name="postcode" aria-describedby="postcodeHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="city">City</label>
-                <input type="text" class="form-control" id="city" aria-describedby="cityHelp" placeholder="">
+                <input type="text" class="form-control" id="city" name="city" aria-describedby="cityHelp" placeholder="">
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <input type="submit" name="submit-customer" class="btn btn-primary">Create</input>
         </form>
-
-
-
-
-
-
-
-
 
 
 
@@ -266,17 +306,17 @@ if(isset($_POST['create-car'])){
         <form method="POST">
             <div class="form-group">
                 <label for="brand">Brand</label>
-                <input type="text" class="form-control" id="brand" aria-describedby="brandHelp" placeholder="">
+                <input type="text" class="form-control" name="make" id="brand" aria-describedby="brandHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="model">Model</label>
-                <input type="text" class="form-control" id="model" aria-describedby="modelHelp" placeholder="">
+                <input type="text" class="form-control" name="model" id="model" aria-describedby="modelHelp" placeholder="">
             </div>
             <div class="form-group">
                 <label for="licensenumber">License number</label>
-                <input type="text" class="form-control" id="licensenumber" aria-describedby="licensenumberHelp" placeholder="">
+                <input type="text" class="form-control" name="licensenumber" id="licensenumber" aria-describedby="licensenumberHelp" placeholder="">
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+            <input type="submit" class="btn btn-primary" name="create-car">Create</input>
         </form>
 
 
@@ -286,8 +326,8 @@ if(isset($_POST['create-car'])){
       </div>
     </div>
   </div>
-<<<<<<< HEAD
+
 </div>
-=======
+
 </div>
->>>>>>> 68d9d7e10ea9f78083bfcd867767bd45addb24bf
+
