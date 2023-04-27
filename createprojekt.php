@@ -42,7 +42,7 @@ if(isset($_POST['create-car'])){
 
 <h2 class="pcenter">Customer info</h2><br>
 <form method="POST">
-  
+
 <select id="normalize">
 <option value=""></option>
     <?php
@@ -53,6 +53,7 @@ if(isset($_POST['create-car'])){
 
     ?>
 </select>
+
 
 <br>
 <div class="pcenter">
@@ -68,12 +69,12 @@ if(isset($_POST['create-car'])){
 
 <h2 class="pcenter">Car info</h2><br>
 
-<select id="normalize">
+<select id="normalize2">
 <option value=""></option>
     <?php
-        $allcustomer = fetchTcustomer($conn);
-        foreach($allcustomer as $row){
-            echo "<option value='{$row['id']}'>{$row['First_Name']}</option>" ;
+        $allcars = fetchcar($conn);
+        foreach($allcars as $row){
+            echo "<option value='{$row['id']}'>{$row['Make']}    {$row['Reg']}</option>" ;
         }
 
     ?>

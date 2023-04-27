@@ -48,10 +48,10 @@ function fetchTcustomer($conn){
     return $fetchTcustomer; 
 }
 
-function fetchTcustomer($conn){
-    $fetchTcustomer= $conn->prepare('SELECT * FROM customer') ;
-    $fetchTcustomer->execute();
-    return $fetchTcustomer; 
+function fetchcar($conn){
+    $fetchcar= $conn->prepare('SELECT * FROM cars') ;
+    $fetchcar->execute();
+    return $fetchcar; 
 }
 
 
