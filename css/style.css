@@ -9,9 +9,8 @@
 
 .projects {
 	margin: 0 auto;
+	margin-top: 15px;
 	width: 1000px;
-	height: 100px;
-	border: 1px solid black;
 }
 
 .center {
@@ -22,3 +21,42 @@
 	text-align: center;
 }
 
+
+body {
+	font-family: 'Montserrat';
+	font-style: Italic;
+	padding:20px;
+  }
+  
+  .header {
+	text-align: center;
+	padding: 20px;
+	font-size:20px;
+  }
+
+  .card-title {
+	font-weight:bold;
+	text-align: center;
+  }
+
+  .card-text {
+	text-align: justify;
+  }
+  
+  #right-panel-link {
+	background-color: #555;
+	color: white;
+	font-size: 16px;
+	padding: 12px 20px;
+	border: none;
+	cursor: pointer;
+	border-radius: 5px;
+  }
+
+  .mycolor {
+	background-color: pink !important;
+  }
+
+  .mycolor2 {
+	background-color: lightblue !important;
+  }
